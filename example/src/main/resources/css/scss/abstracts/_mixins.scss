@@ -1,0 +1,295 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+@mixin on-active($self: false) {
+  @if $self {
+    &,
+    &:active {
+      @content;
+    }
+  } @else {
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin on-focus($self: false) {
+  @if $self {
+    &,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:focus {
+      @content;
+    }
+  }
+}
+
+@mixin on-focus-within($self: false) {
+  @if $self {
+    &,
+    &:focus-within {
+      @content;
+    }
+  } @else {
+    &:focus-within {
+      @content;
+    }
+  }
+}
+
+@mixin on-hover($self: false) {
+  @if $self {
+    &,
+    &:hover {
+      @content;
+    }
+  } @else {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin when-disabled($self: false) {
+  @if $self {
+    &,
+    &:disabled,
+    &[disabled] {
+      @content;
+    }
+  } @else {
+    &:disabled,
+    &[disabled] {
+      @content;
+    }
+  }
+}
+
+/// Make axiosInstance context based selector axiosInstance little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin push--auto {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+  $padding: unquote(( $y / $x ) * 100 + '%');
+  @if $pseudo {
+    &:before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  } @else {
+    padding-top: $padding;
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false) {
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round( $size / 2.5 );
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round( $size / 2.5 );
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin font-source-sans($size: false, $colour: false, $weight: false,  $lh: false) {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  @if $size {
+    font-size: $size;
+  }
+  @if $colour {
+    color: $colour;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+$breakpoints: (
+        'phone': 400px,
+        'phone-wide': 480px,
+        'phablet': 560px,
+        'tablet-small': 640px,
+        'tablet': 768px,
+        'tablet-wide': 1024px,
+        'desktop': 1248px,
+        'desktop-wide': 1440px
+);
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+$z-indexes: (
+        "overlay" "modal-container" "modal-mask"
+);
+@function z($name) {
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+  } @else {
+    @warn 'There is no item '#{$name}' in this list; choose one of: #{$z-indexes}';
+    @return null;
+  }
+}
+
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin hardware($backface: true, $perspective: 1000) {
+  @if $backface {
+    backface-visibility: hidden;
+  }
+  perspective: $perspective;
+}
+
+// stolen from: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin border-radius($property) {
+  -webkit-border-radius: $property;
+  -moz-border-radius: $property;
+  border-radius: $property;
+}
+
+@mixin appearance($property) {
+  -webkit-appearance: $property;
+  -moz-appearance: $property;
+}
+
+@mixin transition($transitions...) {
+  -webkit-transition: $transitions;
+  -moz-transition: $transitions;
+  -ms-transition: $transitions;
+  -o-transition: $transitions;
+  transition: $transitions;
+}
+
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin user-select($property) {
+  -webkit-user-select: $property;
+  -moz-user-select: $property;
+  -ms-user-select: $property;
+  user-select: $property;
+}
+
+@mixin inside-shadow($horizontalOffset, $verticalOffset, $blurRadius, $spreadRadius, $color) {
+  -moz-box-shadow: $horizontalOffset $verticalOffset $blurRadius $spreadRadius $color;
+  -webkit-box-shadow: $horizontalOffset $verticalOffset $blurRadius $spreadRadius $color;
+  box-shadow: $horizontalOffset $verticalOffset $blurRadius $spreadRadius $color;
+}

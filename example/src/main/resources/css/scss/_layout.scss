@@ -1,0 +1,30 @@
+html, body {
+  height: 100vh;
+  margin: 0;
+}
+
+.full-site-wrap {
+  position: relative;
+  height: 100%;
+}
+
+.main-grid {
+  display: grid;
+  grid: 'header header' 4rem 'nav main-content' calc(100vh - 4rem)
+          / minmax(9rem, 1fr) 10fr;
+}
+
+.header {
+  grid-area: header;
+}
+
+
+.side-menu {
+  grid-area: nav;
+}
+
+.main-content {
+  grid-area: main-content;
+  overflow: auto;
+  padding: 1rem;
+}

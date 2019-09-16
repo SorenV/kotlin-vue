@@ -1,0 +1,82 @@
+/**
+ * Basic styles for inputs
+ */
+
+select,
+input:not([type='checkbox']):not([type='radio']):not([type='file']) {
+  height: 2.3125rem;
+}
+
+textarea,
+canvas,
+select,
+input:not([type='checkbox']):not([type='radio']):not([type='file']) {
+  @include appearance(none);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+textarea,
+canvas,
+select,
+input:not([type='checkbox']):not([type='radio']):not([type='file']) {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  width: 100%;
+
+  @include on-event() {
+    box-shadow: 0 0 5px #999;
+    border-color: #999;
+  }
+}
+
+input[type='file'] {
+  padding: 0.5rem;
+}
+
+textarea:disabled, textarea[disabled], textarea[readonly],
+select:disabled, select[disabled], select[readonly],
+input:disabled, input[disabled], input[readonly] {
+  cursor: default
+}
+
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 25rem;
+  min-width: 16rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+
+  &:not(:first-child) {
+    margin-top: 0.25rem;
+  }
+
+  &:last-child {
+    margin-bottom: 1rem;
+  }
+
+  .form-input {
+    width: 100%;
+
+    &.check-box {
+      margin-top: 0.5rem;
+
+      input[type="checkbox"] {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  label {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    line-height: 1.15rem;
+  }
+}
+
+

@@ -1,0 +1,58 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+/// Copy text color
+/// @type Color
+$text-color: rgb(65, 65, 65) !default;
+
+/// White
+/// @type Color
+$white: rgb(255, 255, 255) !default;
+
+/// grey
+/// @type Color
+$color-grey-5: rgb(249, 249, 250) !default;
+
+/// grey
+/// @type Color
+$color-grey-10: rgb(244, 244, 245) !default;
+
+/// grey
+/// @type Color
+$color-grey-20: rgb(235, 235, 235) !default;
+
+/// grey
+/// @type Color
+$color-grey-40: rgb(215, 215, 215) !default;
+
+/// grey
+/// @type Color
+$color-grey-70: rgb(184, 184, 185) !default;
+
+/// grey
+/// @type Color
+$color-grey-100: rgba(155, 155, 155, 0.55) !default;
+
+/// grey
+/// @type Color
+$color-grey-130: rgba(125, 125, 125, 0.65) !default;
+
+/// grey
+/// @type Color
+$color-grey-170: rgba(85, 85, 85, 0.75) !default;
+
+
+
+
+
+
