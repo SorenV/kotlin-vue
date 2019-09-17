@@ -17,7 +17,6 @@ yarn-debug.log*
 *.sln
 
 .gradle
-gradle
 *.iml
 build
 
