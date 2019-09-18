@@ -11,7 +11,7 @@ import wrapper.div
 import wrapper.vComponent
 import wrapper.vRender
 
-fun primarySideMenu() = vComponent<Unit> {
+fun sideMenu() = vComponent<Unit> {
     name = "PrimarySideMenu"
 
     css { +stylesSideMenu }
@@ -36,9 +36,9 @@ fun primarySideMenu() = vComponent<Unit> {
                 }
                 sideMenuItem().h {
                     props {
-                        to = "forms"
-                        title = "Forms"
-                        icon = "file-alt"
+                        to = "reactiveApi"
+                        title = "Reactive API"
+                        icon = "cogs"
                     }
                 }
                 sideMenuGroup().h {

@@ -77,6 +77,9 @@ external interface IVue {
     var `$vnode`: VNode
     var `$attrs`: Record<String, String>
     var `$listeners`: Record<String, dynamic /* Function<*> | Array<Function<*>> */>
+    var `$router`: VueRouter?
+    var `$route`: Route?
+
     fun `$mount`(elementOrSelector: Element? = definedExternally, hydrating: Boolean? = definedExternally): IVue
     fun `$mount`(elementOrSelector: String? = definedExternally, hydrating: Boolean? = definedExternally): IVue
     fun `$forceUpdate`()

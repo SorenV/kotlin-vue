@@ -48,8 +48,6 @@ kotlin {
                     implementation(npm("vue", "latest"))
                     implementation(npm("vue-router", "latest"))
                     implementation(npm("@vue/composition-api", "latest"))
-                    implementation(npm("@jetbrains/kotlin-css", "latest"))
-                    implementation(npm("@jetbrains/kotlin-css-js", "latest"))
                     implementation(npm("@fortawesome/fontawesome-svg-core", "latest"))
                     implementation(npm("@fortawesome/free-solid-svg-icons", "latest"))
                     implementation(npm("@fortawesome/vue-fontawesome", "latest"))

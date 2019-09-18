@@ -24,6 +24,8 @@ open external class Vue(options: ComponentOptions<Any>? = definedExternally) : I
     override var `$vnode`: VNode
     override var `$attrs`: Record<String, String>
     override var `$listeners`: Record<String, dynamic>
+    override var `$router`: VueRouter?
+    override var `$route`: Route?
 
     override fun `$mount`(elementOrSelector: Element?, hydrating: Boolean?): IVue
 

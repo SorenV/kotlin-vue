@@ -40,12 +40,20 @@ input:disabled, input[disabled], input[readonly] {
   cursor: default
 }
 
+form {
+  display: flex;
+}
 
 .form-col {
   display: flex;
   flex-direction: column;
   max-width: 25rem;
   min-width: 16rem;
+
+  &:not(:first-of-type) {
+    margin-left: 2rem;
+  }
+
 }
 
 .form-row {

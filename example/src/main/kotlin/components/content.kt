@@ -2,7 +2,7 @@ package components
 
 import wrapper.*
 
-fun primaryMainContent() = vComponent<Unit> {
+fun content() = vComponent<Unit> {
     name = "PrimaryMainContent"
 
     css { +stylesPrimaryMainContent }
@@ -11,9 +11,7 @@ fun primaryMainContent() = vComponent<Unit> {
         vRender {
             div {
                 `class` = "main-content"
-                routerView {
-                    name = "home"
-                }
+                routerView()
             }
         }
     }

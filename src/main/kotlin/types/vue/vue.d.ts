@@ -12,6 +12,7 @@ import {
 } from "./options";
 import {NormalizedScopedSlot, VNode, VNodeChildren, VNodeData} from "./vnode";
 import {PluginFunction, PluginObject} from "./plugin";
+import {Route, VueRouter} from "./router";
 
 export interface CreateElement {
     (tag?: string | Component<any, any, any, any> | AsyncComponent<any, any, any, any> | (() => Component), children?: VNodeChildren): VNode;
@@ -35,6 +36,8 @@ export interface Vue {
     readonly $vnode: VNode;
     readonly $attrs: Record<string, string>;
     readonly $listeners: Record<string, Function | Function[]>;
+    $router: VueRouter
+    $route: Route
 
     $mount(elementOrSelector?: Element | string, hydrating?: boolean): this;
 

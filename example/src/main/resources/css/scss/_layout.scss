@@ -16,6 +16,7 @@ html, body {
 
 .header {
   grid-area: header;
+  background-color: $color-grey-130;
 }
 
 
@@ -26,5 +27,6 @@ html, body {
 .main-content {
   grid-area: main-content;
   overflow: auto;
+  background-color: $color-grey-5;
   padding: 1rem;
 }

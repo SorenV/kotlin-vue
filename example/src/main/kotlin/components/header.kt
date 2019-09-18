@@ -8,7 +8,7 @@ import wrapper.div
 import wrapper.vComponent
 import wrapper.vRender
 
-fun primaryHeader() = vComponent<Unit> {
+fun header() = vComponent<Unit> {
     name = "PrimaryHeader"
 
     css {

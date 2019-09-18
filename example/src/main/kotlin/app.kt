@@ -1,5 +1,5 @@
 import kotlinx.html.id
-import views.primaryView
+import views.container
 import wrapper.div
 import wrapper.vComponent
 import wrapper.vRender
@@ -7,8 +7,9 @@ import wrapper.vRender
 
 fun app() = vComponent<Unit> {
     name = "App"
-    setup = { _, _ ->
+    setup = { _, ctx ->
 
+        ctx.parent?.`$router`?.let { provideRouter(it) }
 
         vRender {
             div {
@@ -16,8 +17,7 @@ fun app() = vComponent<Unit> {
                 attrs {
                     id = "app"
                 }
-                primaryView().h()
-
+                container().h()
             }
         }
     }

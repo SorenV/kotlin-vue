@@ -1,3 +1,5 @@
+import {VueConstructor} from "../vue";
+
 export declare const onCreated: (callback: Function) => void;
 export declare const onBeforeMount: (callback: Function) => void;
 export declare const onMounted: (callback: Function) => void;

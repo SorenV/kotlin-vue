@@ -37,6 +37,7 @@ kotlin {
                     implementation(npm("core-js", "latest"))
                     implementation(npm("@jetbrains/kotlin-css", "latest"))
                     implementation(npm("@jetbrains/kotlin-css-js", "latest"))
+                    implementation(npm("@jetbrains/kotlin-extensions", "latest"))
                     implementation("org.jetbrains:kotlin-extensions:$kotlinExtensionsVersion")
                     implementation("org.jetbrains.kotlin:kotlin-stdlib-js:$kotlinVersion")
                     implementation("org.jetbrains:kotlin-css:1.0.0-pre.83-kotlin-1.3.50")

@@ -108,11 +108,19 @@ input:disabled, input[disabled], input[readonly] {
     cursor: default;
 }
 
+form {
+    display: flex;
+}
+
 .form-col {
     display: flex;
     flex-direction: column;
     max-width: 25rem;
     min-width: 16rem;
+}
+
+.form-col:not(:first-of-type) {
+    margin-left: 2rem;
 }
 
 .form-row {
@@ -209,6 +217,7 @@ html, body {
 
 .header {
     grid-area: header;
+    background-color: rgba(125, 125, 125, 0.65);
 }
 
 .side-menu {
@@ -218,5 +227,6 @@ html, body {
 .main-content {
     grid-area: main-content;
     overflow: auto;
+    background-color: #f9f9fa;
     padding: 1rem;
 }
