@@ -7,7 +7,7 @@ import kotlinx.css.properties.TextDecoration
 import wrapper.*
 import kotlin.js.Json
 
-class SideMenuItem {
+class SideMenuItemProps {
 
     var icon: Any? = null
 
@@ -28,48 +28,49 @@ class SideMenuItem {
     var to: String? = null
 }
 
-fun sideMenuItem() = vComponent(SideMenuItem()) {
-    name = "SideMenuItem"
+class SideMenuItem(builder: VComponentBuilder<SideMenuItemProps>) :
+    VComponent<SideMenuItemProps>(builder, SideMenuItemProps()) {
+    init {
+        css { +stylesSideMenuItem }
 
-    css { +stylesSideMenuItem }
-
-    props {
-        "icon" {
-            type = arrayOf(String::class.js, Object::class.js, Array<String>::class.js)
-            default = "icons"
+        propData {
+            "icon" {
+                type = arrayOf(String::class.js, Object::class.js, Array<String>::class.js)
+                default = "icons"
+            }
+            "title"{
+                type = String::class.js
+                required = true
+            }
+            "to"{
+                type = String::class.js
+                default = "home"
+            }
         }
-        "title"{
-            type = String::class.js
-            required = true
-        }
-        "to"{
-            type = String::class.js
-            default = "home"
-        }
-    }
 
-    setup = { p, _ ->
+        setup { p, _ ->
 
-        vRender {
-            div {
-                `class` = "menu-item"
+            vRender {
                 div {
-                    `class` = "icon fa-fw"
+                    `class` = "menu-item"
+                    div {
+                        `class` = "icon fa-fw"
 
-                    h(FaIcon) {
+                        h(FaIcon) {
+                            props {
+                                p.icon?.let { icon = it }
+                            }
+                        }
+                    }
+
+                    routerLink {
                         props {
-                            p.icon?.let { icon = it }
+                            to {
+                                name = p.to
+                            }
                         }
+                        +p.title
                     }
-                }
-
-                routerLink {
-                    props {
-                        to {
-                            name = p.to
-                        }
-                    }
-                    +p.title
                 }
             }
         }

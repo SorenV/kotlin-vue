@@ -3,13 +3,13 @@ import external.composition_api.invoke
 import external.composition_api.provide
 import external.composition_api.symbol
 import external.vue.VueRouter
-import views.directives.directives
-import views.forms.refsExample
-import views.home.home
-import views.reactive_api.reactiveApi
-import views.reactive_api.reactiveExample
-import views.slots.scopedSlots
-import views.slots.slots
+import views.Directives
+import views.Home
+import views.reactive_api.Reactive
+import views.reactive_api.ReactiveApi
+import views.reactive_api.RefsExample
+import views.slots.ScopedSlots
+import views.slots.Slots
 import wrapper.vRouter
 
 val vRouter = vRouter {
@@ -18,43 +18,43 @@ val vRouter = vRouter {
     vRoute {
         path = "/"
         name = "home"
-        component = home()
+        component = Home().component()
     }
 
     vRoute {
         path = "/directives"
         name = "directives"
-        component = directives()
+        component = Directives().component()
     }
 
     vRoute {
         path = "/reactive_api"
         name = "reactiveApi"
-        component = reactiveApi()
+        component = ReactiveApi().component()
 
         childRoute {
             path = "reactive"
             name = "reactive"
-            component = reactiveExample()
+            component = Reactive().component()
         }
 
         childRoute {
             path = "refs"
             name = "ref"
-            component = refsExample()
+            component = RefsExample().component()
         }
     }
 
     vRoute {
         path = "/slots"
         name = "slots"
-        component = slots()
+        component = Slots().component()
     }
 
     vRoute {
         path = "/scoped_slots"
         name = "scopedSlots"
-        component = scopedSlots()
+        component = ScopedSlots().component()
     }
 }
 

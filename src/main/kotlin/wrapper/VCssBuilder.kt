@@ -3,6 +3,9 @@
 package wrapper
 
 import kotlinx.css.*
+import org.w3c.dom.Element
+import org.w3c.dom.css.CSSStyleSheet
+import kotlin.browser.document
 
 
 typealias VCssRuleSet = VCssBuilder.() -> Unit
@@ -246,3 +249,25 @@ class VCssBuilder : StyledElement() {
     }
 }
 
+fun buildCss(css: VCssBuilder, name: String?) {
+
+    if (name === null) {
+        return
+    }
+
+    document.getElementById(name)?.let { return }
+
+    val style: Element = document.createElement("style")
+
+    style.id = name
+
+    style.setAttribute("type", "text/css")
+
+    document.head?.appendChild(style)
+
+    val sheet = style.asDynamic().sheet.unsafeCast<CSSStyleSheet>()
+
+    css.rules.withIndex().map {
+        sheet.insertRule(it.value.toString(), it.index)
+    }
+}

@@ -152,7 +152,7 @@ external interface ComponentOptions<Props> {
     var watch: Record<String, dynamic /* WatchOptionsWithHandler<Any> | WatchHandler<Any> | String */>? get() = definedExternally; set(value) = definedExternally
     var el: dynamic /* Element | String */
     var template: String? get() = definedExternally; set(value) = definedExternally
-    var render: (createElement: CreateElement?) -> VNode
+    var render: () -> VNode
     val renderError: ((createElement: CreateElement, err: Error) -> VNode)? get() = definedExternally
     var staticRenderFns: Array<(createElement: CreateElement) -> VNode>? get() = definedExternally; set(value) = definedExternally
     val beforeCreate: ((`this`: IVue) -> Unit)? get() = definedExternally

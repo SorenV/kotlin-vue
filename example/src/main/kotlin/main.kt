@@ -21,12 +21,9 @@ fun main() {
     window.onload = {
         Vue(jsObject {
             router = vRouter
-            render = {
-                vRender {
-                    app().h()
-                }()
+            render = vRender {
+                +App()
             }
         }).`$mount`(document.getElementById("root")!!)
     }
 }
-

@@ -13,20 +13,19 @@ import org.w3c.dom.events.Event
 /**
  * This class contains builders specific to vue elements in general.  i.e. children and vnode data
  */
-open class VNodeDataBuilder<P : Any, A, D> : VNodeData<P, A, D> {
+open class VNodeDataBuilder<P, A, D> : VNodeData<P, A, D> {
 
-
-    var children: ArrayList<Any> = arrayListOf()
+    var children: ArrayList<VNode> = arrayListOf()
 
     fun child(child: VNode) {
         children.add(child)
     }
 
     operator fun String.unaryPlus() {
-        children.add(this)
+        children.add(this.unsafeCast<VNode>())
     }
 
-    fun getChildren(): Array<Any> {
+    fun getChildren(): Array<VNode> {
         return children.toTypedArray()
     }
 
