@@ -3,11 +3,6 @@
 package wrapper
 
 import external.vue.*
-import kotlinx.html.Entities
-import kotlinx.html.Tag
-import kotlinx.html.TagConsumer
-import kotlinx.html.Unsafe
-import org.w3c.dom.events.Event
 
 
 /**
@@ -115,34 +110,6 @@ open class VNodeDataBuilder<P, A, D> : VNodeData<P, A, D> {
         operator fun <R> String.invoke(callback: EventCallback<R>) = addOnEvent(this, callback)
 
         fun custom(eventName: String, builder: EventCallbacksBuilder<Any>) = addOnEvents(eventName, builder)
-    }
-
-    val consumer = object : TagConsumer<Unit> {
-        override fun onTagAttributeChange(tag: Tag, attribute: String, value: String?) {
-        }
-
-        override fun onTagComment(content: CharSequence) {
-        }
-
-        override fun onTagContent(content: CharSequence) {
-        }
-
-        override fun onTagContentEntity(entity: Entities) {
-        }
-
-        override fun onTagContentUnsafe(block: Unsafe.() -> Unit) {
-        }
-
-        override fun onTagStart(tag: Tag) {
-        }
-
-        override fun onTagEnd(tag: Tag) {
-        }
-
-        override fun onTagEvent(tag: Tag, event: String, value: (Event) -> Unit) {
-        }
-
-        override fun finalize() {}
     }
 
 }

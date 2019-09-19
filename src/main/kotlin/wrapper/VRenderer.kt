@@ -19,7 +19,15 @@ typealias VRender = VRenderer<*, *, *>
 open class VRenderer<P, A, D> : VNodeDataBuilder<P, A, D>() {
 
     operator fun <T : Any> VComponent<T>.unaryPlus(): VNode {
-        val vNode = createElement(component(), this, getChildren())
+
+        val component = component()
+
+        this.propData = undefined
+        this.setupFunction = undefined
+        this.propsBuilder = undefined
+        this.domPropsBuilder = undefined
+
+        val vNode = createElement(component, this, getChildren())
         this@VRenderer.child(vNode)
         return vNode
     }
@@ -39,21 +47,12 @@ open class VRenderer<P, A, D> : VNodeDataBuilder<P, A, D>() {
         return vNode
     }
 
-
-    fun h(tag: String, builder: VRenderer<Unit, Unit, Unit>.() -> Unit): VNode {
-
-        val vNodeData = VRenderer<Unit, Unit, Unit>().apply(builder)
-
-        val vNode = createElement(tag, vNodeData, vNodeData.getChildren())
-        child(vNode)
-        return vNode
-    }
-
     fun <P, A, D> h(tag: String, builder: VRenderer<P, A, D>.() -> Unit, props: P): VNode {
         val vNodeData = VRenderer<P, A, D>().apply(builder)
 
         vNodeData.propsBuilder?.let {
             vNodeData.props = props.apply(it)
+            vNodeData.propsBuilder = undefined
         }
 
         val vNode = createElement(tag, vNodeData, vNodeData.getChildren())
@@ -67,6 +66,7 @@ open class VRenderer<P, A, D> : VNodeDataBuilder<P, A, D>() {
 
         vNodeData.propsBuilder?.let {
             vNodeData.props = jsObject(it)
+            vNodeData.propsBuilder = undefined
         }
 
         val vNode = createElement(tag, vNodeData, vNodeData.getChildren())

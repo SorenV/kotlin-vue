@@ -8,6 +8,7 @@ import external.vue.invoke
 import kotlinext.js.jsObject
 import kotlinx.html.*
 import org.w3c.dom.*
+import org.w3c.dom.events.Event
 
 fun <A : HTMLTag, D : HTMLElement> VBuilder.tag(
     tag: String,
@@ -336,4 +337,30 @@ fun VRender.video(render: VRenderer<Unit, VIDEO, HTMLVideoElement>.() -> Unit): 
     tag("video", VIDEO(mutableMapOf(), consumer), render)
 
 
+val consumer = object : TagConsumer<Unit> {
+    override fun onTagAttributeChange(tag: Tag, attribute: String, value: String?) {
+    }
 
+    override fun onTagComment(content: CharSequence) {
+    }
+
+    override fun onTagContent(content: CharSequence) {
+    }
+
+    override fun onTagContentEntity(entity: Entities) {
+    }
+
+    override fun onTagContentUnsafe(block: Unsafe.() -> Unit) {
+    }
+
+    override fun onTagStart(tag: Tag) {
+    }
+
+    override fun onTagEnd(tag: Tag) {
+    }
+
+    override fun onTagEvent(tag: Tag, event: String, value: (Event) -> Unit) {
+    }
+
+    override fun finalize() {}
+}

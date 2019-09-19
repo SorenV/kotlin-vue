@@ -11,11 +11,9 @@ open class VComponent<P : Any>(
     renderProps: P? = null
 ) : VNodeDataBuilder<P, Unit, Unit>() {
 
-    private var propData: PropData? = null
+    var propData: PropData? = null
 
-    private var setupFunction: SetupFunction<*>? = null
-
-    var css = VCssBuilder()
+    var setupFunction: SetupFunction<*>? = null
 
     init {
         builder?.let { apply(it) }
@@ -26,7 +24,7 @@ open class VComponent<P : Any>(
     }
 
     fun css(builder: VCssRuleSet) {
-        css.builder()
+        val css = VCssBuilder().apply(builder)
         buildCss(css, this::class.simpleName)
     }
 
@@ -38,7 +36,7 @@ open class VComponent<P : Any>(
         setupFunction = value
     }
 
-    open fun component(): VComponentOptions {
+    fun component(): VComponentOptions {
         return jsObject {
             name = this@VComponent::class.simpleName
             props = propData
@@ -68,7 +66,5 @@ fun <P : Any> vComponent(
     renderProps: P? = null,
     builder: VFunctionComponent<P>.() -> Unit
 ): VFunctionComponent<P> {
-    val vFunctionComponent = VFunctionComponent(renderProps).apply(builder)
-    buildCss(vFunctionComponent.css, vFunctionComponent.name)
-    return vFunctionComponent
+    return VFunctionComponent(renderProps).apply(builder)
 }
