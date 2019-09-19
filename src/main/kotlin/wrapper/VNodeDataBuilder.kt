@@ -5,9 +5,6 @@ package wrapper
 import external.vue.*
 
 
-/**
- * This class contains builders specific to vue elements in general.  i.e. children and vnode data
- */
 open class VNodeDataBuilder<P, A, D> : VNodeData<P, A, D> {
 
     var children: ArrayList<VNode> = arrayListOf()

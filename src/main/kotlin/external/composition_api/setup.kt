@@ -14,5 +14,6 @@ external interface SetupContext {
     val refs: Json?
     val parent: Vue?
     val root: Vue
+    val listeners: Json?
     fun emit(event: String, vararg args: Any)
 }

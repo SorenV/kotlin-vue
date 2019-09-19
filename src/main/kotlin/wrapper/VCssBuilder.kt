@@ -251,7 +251,7 @@ class VCssBuilder : StyledElement() {
 
 fun buildCss(css: VCssBuilder, name: String?) {
 
-    if (name === null) {
+    if (name == null) {
         return
     }
 
