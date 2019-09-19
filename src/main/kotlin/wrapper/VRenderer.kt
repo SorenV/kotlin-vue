@@ -24,6 +24,22 @@ open class VRenderer<P, A, D> : VNodeDataBuilder<P, A, D>() {
         return vNode
     }
 
+    fun <T : Any> VFunctionComponent<T>.h(builder: (VRenderer<T, Unit, Unit>.() -> Unit)? = null): VNode {
+        val vNodeData = VRenderer<T, Unit, Unit>()
+
+        builder?.let { vNodeData.apply(it) }
+
+        vNodeData.propsBuilder?.let {
+            vNodeData.props = props?.apply(it) ?: jsObject(it)
+            vNodeData.propsBuilder = undefined
+        }
+
+        val vNode = createElement(component(), vNodeData, vNodeData.getChildren())
+        this@VRenderer.child(vNode)
+        return vNode
+    }
+
+
     fun h(tag: String, builder: VRenderer<Unit, Unit, Unit>.() -> Unit): VNode {
 
         val vNodeData = VRenderer<Unit, Unit, Unit>().apply(builder)

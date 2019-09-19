@@ -6,7 +6,7 @@ import kotlinext.js.jsObject
 
 typealias VComponentBuilder<P> = VComponent<P>.() -> Unit
 
-abstract class VComponent<P : Any>(
+open class VComponent<P : Any>(
     builder: VComponentBuilder<P>? = null,
     renderProps: P? = null
 ) : VNodeDataBuilder<P, Unit, Unit>() {
@@ -38,7 +38,7 @@ abstract class VComponent<P : Any>(
         setupFunction = value
     }
 
-    fun component(): VComponentOptions {
+    open fun component(): VComponentOptions {
         return jsObject {
             name = this@VComponent::class.simpleName
             props = propData
@@ -60,5 +60,15 @@ interface VComponentOptions {
     var setup: SetupFunction<*>?
 }
 
+class VFunctionComponent<P : Any>(renderProps: P? = null) : VComponent<P>(renderProps = renderProps) {
+    var name: String? = null
+}
 
-
+fun <P : Any> vComponent(
+    renderProps: P? = null,
+    builder: VFunctionComponent<P>.() -> Unit
+): VFunctionComponent<P> {
+    val vFunctionComponent = VFunctionComponent(renderProps).apply(builder)
+    buildCss(vFunctionComponent.css, vFunctionComponent.name)
+    return vFunctionComponent
+}
