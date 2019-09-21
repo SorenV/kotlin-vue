@@ -6,10 +6,7 @@ import external.vue.Location
 import kotlinext.js.jsObject
 import kotlinx.css.*
 import useRouter
-import wrapper.VComponent
-import wrapper.div
-import wrapper.routerView
-import wrapper.vRender
+import wrapper.*
 import kotlin.js.json
 
 private sealed class Tabs {
@@ -76,7 +73,13 @@ class ReactiveApi : VComponent<Unit>() {
                             }
                         }
                     }
-                    routerView()
+                    console.log(
+                        keepAlive {
+                            props {
+                                include = "Reactive"
+                            }
+                            routerView()
+                        })
                 }
             }
         }

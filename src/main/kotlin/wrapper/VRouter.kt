@@ -123,13 +123,13 @@ class RouterLinkProps {
     var exactActiveClass: String? = undefined
 }
 
-fun VRender.routerView(render: (VNodeDataBuilder<RouterViewProps, Any, Any>.() -> Unit)? = null): VNode {
+fun VRender.routerView(render: (VRenderer<RouterViewProps, Any, Any>.() -> Unit)? = null): VNode {
     return render?.let {
         h("router-view", render, RouterViewProps())
     } ?: h("router-view")
 }
 
 
-fun VRender.routerLink(builder: VNodeDataBuilder<RouterLinkProps, Any, Any>.() -> Unit): VNode =
+fun VRender.routerLink(builder: VRenderer<RouterLinkProps, Any, Any>.() -> Unit): VNode =
     h("router-link", builder, RouterLinkProps())
 

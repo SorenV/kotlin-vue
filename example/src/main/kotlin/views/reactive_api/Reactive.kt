@@ -1,5 +1,7 @@
 package views.reactive_api
 
+import external.composition_api.onActivated
+import external.composition_api.onDeactivated
 import external.composition_api.reactive
 import kotlinx.css.LinearDimension
 import kotlinx.css.label
@@ -26,6 +28,12 @@ class Reactive : VComponent<Unit>() {
 
         setup { _, _ ->
 
+            onActivated {
+                console.log("Activated")
+            }
+            onDeactivated {
+                console.log("onDeactivated")
+            }
             val user = reactive(User(1))
 
             vRender {
