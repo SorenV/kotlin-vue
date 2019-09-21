@@ -1,9 +1,10 @@
 package wrapper
 
+import external.vue.PropDefs
 import kotlinext.js.jsObject
 
-fun buildPropsData(builder: PropData.() -> Unit): PropData {
-    val propsData = jsObject<PropData> {}
+fun buildPropDefs(builder: PropData.() -> Unit): VPropDefs {
+    val propsData = jsObject<VPropDefs> {}
     PropData().apply(builder).propDefinitions.map {
         propsData.asDynamic()[it.key] = jsObject<PropOptions> {
             type = it.value.type
@@ -17,15 +18,15 @@ fun buildPropsData(builder: PropData.() -> Unit): PropData {
 
 
 class PropData {
-    val propDefinitions: MutableMap<String, PropDef> = mutableMapOf()
+    val propDefinitions: MutableMap<String, VPropDefs> = mutableMapOf()
 
-    operator fun String.invoke(builder: PropDef.() -> Unit) =
+    operator fun String.invoke(builder: VPropDefs.() -> Unit) =
         propDefinitions.set(this, jsObject(builder))
 }
 
-class PropDef {
-    var name: String? = null
-    var type: Any? = null
+class VPropDefs : PropDefs {
+    override var name: String? = null
+    override var type: Any? = null
 
     fun type(clazz: JsClass<*>) {
         type = clazz
@@ -35,9 +36,9 @@ class PropDef {
         type = types
     }
 
-    var required: Boolean? = null
-    var default: Any? = null
-    var validator: ((value: Any) -> Boolean)? = null
+    override var required: Boolean? = null
+    override var default: Any? = null
+    override var validator: ((value: Any) -> Boolean)? = null
 }
 
 interface PropOptions {

@@ -1,6 +1,7 @@
 package external.font_awsome
 
 fun initFa() {
+    library.add(faRobot)
     library.add(faVectorSquare)
     library.add(faObjectUngroup)
     library.add(faCogs)

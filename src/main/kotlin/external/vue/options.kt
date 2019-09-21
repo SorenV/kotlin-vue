@@ -4,7 +4,6 @@ package external.vue
 
 
 import org.w3c.dom.HTMLElement
-import kotlin.js.Json
 import kotlin.js.Promise
 
 external interface Record<K, T>
@@ -13,10 +12,10 @@ external interface Constructor
 external interface EsModuleComponent {
     var default: Component
 }
-typealias AsyncComponentPromise<Props> = (resolve: (component: dynamic /* Any | FunctionalComponentOptions<Props> | ComponentOptions<Any, Data, Methods, Computed, Props> */) -> Unit, reject: (reason: Any? /* = null */) -> Unit) -> dynamic
+typealias AsyncComponentPromise = (resolve: (component: dynamic /* Any | FunctionalComponentOptions<Props> | ComponentOptions<Any, Data, Methods, Computed, Props> */) -> Unit, reject: (reason: Any? /* = null */) -> Unit) -> dynamic
 
 external interface AsyncComponent<Props> {
-    var component: AsyncComponentPromise<Props>
+    var component: AsyncComponentPromise
     var loading: dynamic /* Component | EsModuleComponent */
     var error: dynamic /* Component | EsModuleComponent */
     var delay: Number? get() = definedExternally; set(value) = definedExternally
@@ -84,7 +83,7 @@ inline operator fun Components.set(key: String, value: ComponentOptions<Any>) {
 }
 
 
-inline operator fun Components.set(key: String, noinline value: AsyncComponentPromise<Any>) {
+inline operator fun Components.set(key: String, noinline value: AsyncComponentPromise) {
     asDynamic()[key] = value
 }
 
@@ -114,28 +113,8 @@ inline operator fun Filters.set(key: String, value: Function<*>) {
 }
 
 external interface InjectOption {
-    var from: dynamic /* String | Any */
+    var from: Any? /* String | Symbol */ get() = definedExternally; set(value) = definedExternally
     var default: Any? get() = definedExternally; set(value) = definedExternally
-}
-
-external interface Inject
-
-
-inline operator fun Inject.get(key: String): dynamic /* String | Any | InjectOption */ = asDynamic()[key]
-
-
-inline operator fun Inject.set(key: String, value: String) {
-    asDynamic()[key] = value
-}
-
-
-inline operator fun Inject.set(key: String, value: Any) {
-    asDynamic()[key] = value
-}
-
-
-inline operator fun Inject.set(key: String, value: InjectOption) {
-    asDynamic()[key] = value
 }
 
 external interface Model {
@@ -188,14 +167,14 @@ external interface FunctionalComponentOptions<Props> {
     var name: String? get() = definedExternally; set(value) = definedExternally
     var props: PropDefs? get() = definedExternally; set(value) = definedExternally
     var model: Model? get() = definedExternally; set(value) = definedExternally
-    var inject: dynamic /* Inject | Array<String> */
+    var inject: Any? /* Inject | Array<String> */
     var functional: Boolean
-    val render: ((`this`: Nothing?, createElement: CreateElement, context: RenderContext<Props>) -> dynamic)? get() = definedExternally
+    var render: ((createElement: CreateElement, context: RenderContext<Props>) -> Any)?
 }
 
 interface PropDefs {
     var name: String?
-    var type: JsClass<*>?
+    var type: Any? /* JsClass<*> | Array<JsClass<*>>*/
     var required: Boolean?
     var default: Any?
     var validator: ((value: Any) -> Boolean)?
@@ -217,14 +196,14 @@ inline operator fun Listeners.set(key: String, value: Array<Function<*>>) {
 }
 
 
-external interface RenderContext<Props> {
-    var props: Props
+external interface RenderContext<P> {
+    var props: P
     var children: Array<VNode>
     fun slots(): Any
-    var data: VNodeData<*, *, *>
+    var data: VNodeData<P, *, *>
     var parent: IVue
     var listeners: Listeners
-    var scopedSlots: Json?
+    var scopedSlots: ScopedSlots?
     var injections: Any
 }
 

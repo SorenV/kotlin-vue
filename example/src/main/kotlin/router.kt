@@ -5,6 +5,7 @@ import external.composition_api.symbol
 import external.vue.VueRouter
 import views.Directives
 import views.Home
+import views.functional_compnents.FunctionalComponents
 import views.reactive_api.Reactive
 import views.reactive_api.ReactiveApi
 import views.reactive_api.RefsExample
@@ -19,6 +20,12 @@ val vRouter = vRouter {
         path = "/"
         name = "home"
         component = Home().component()
+    }
+
+    vRoute {
+        path = "/functional_components"
+        name = "functionalComponents"
+        component = FunctionalComponents().component()
     }
 
     vRoute {

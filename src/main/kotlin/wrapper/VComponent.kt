@@ -6,12 +6,12 @@ import kotlinext.js.jsObject
 
 typealias VComponentBuilder<P> = VComponent<P>.() -> Unit
 
-open class VComponent<P : Any>(
+abstract class VComponent<P : Any>(
     builder: VComponentBuilder<P>? = null,
     renderProps: P? = null
 ) : VNodeDataBuilder<P, Unit, Unit>() {
 
-    var propData: PropData? = null
+    var propDefs: VPropDefs? = null
 
     var setupFunction: SetupFunction<*>? = null
 
@@ -29,7 +29,7 @@ open class VComponent<P : Any>(
     }
 
     fun propData(builder: PropData.() -> Unit) {
-        propData = buildPropsData(builder)
+        propDefs = buildPropDefs(builder)
     }
 
     fun setup(value: SetupFunction<P>) {
@@ -39,7 +39,7 @@ open class VComponent<P : Any>(
     fun component(): VComponentOptions {
         return jsObject {
             name = this@VComponent::class.simpleName
-            props = propData
+            props = propDefs
             setup = setupFunction
         }
     }
@@ -54,17 +54,17 @@ open class VComponent<P : Any>(
 
 interface VComponentOptions {
     var name: String?
-    var props: PropData?
+    var props: VPropDefs?
     var setup: SetupFunction<*>?
 }
 
-class VFunctionComponent<P : Any>(renderProps: P? = null) : VComponent<P>(renderProps = renderProps) {
+class VComponentFuncBuilder<P : Any>(renderProps: P? = null) : VComponent<P>(renderProps = renderProps) {
     var name: String? = null
 }
 
 fun <P : Any> vComponent(
     renderProps: P? = null,
-    builder: VFunctionComponent<P>.() -> Unit
-): VFunctionComponent<P> {
-    return VFunctionComponent(renderProps).apply(builder)
+    builder: VComponentFuncBuilder<P>.() -> Unit
+): VComponentFuncBuilder<P> {
+    return VComponentFuncBuilder(renderProps).apply(builder)
 }

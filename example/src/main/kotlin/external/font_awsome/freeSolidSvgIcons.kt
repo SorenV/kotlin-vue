@@ -6,6 +6,7 @@ package external.font_awsome
 
 external interface IconDefinition
 
+external val faRobot: IconDefinition
 external val faVectorSquare: IconDefinition
 external val faObjectUngroup: IconDefinition
 external val faCogs: IconDefinition
